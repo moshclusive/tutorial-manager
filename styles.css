@@ -1,0 +1,607 @@
+/* General styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F5F5F5; /* Light grey background */
+    display: flex;
+    overflow: hidden; /* Prevent scroll when modal is open */
+    height: 100vh; /* Limit body height to viewport height */
+}
+
+.sidebar {
+    width: 220px;
+    background-color: #ffffff; /* White sidebar */
+    border-right: 1px solid #ddd;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    color: #555; /* Dark grey text */
+    border-radius: 8px; /* Rounded corners */
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-item i {
+    margin-right: 12px; /* Spacing between icon and text */
+    color: #FF6F61; /* Soft coral icons */
+    transition: transform 0.3s ease; /* Icon animation */
+}
+
+.sidebar-item:hover,
+.sidebar-item.selected {
+    background-color: #FFEBE8; /* Very light coral for hover and selected state */
+    color: #333; /* Darker text on hover */
+    transform: translateX(5px); /* Slide effect */
+}
+
+.sidebar-item:hover i {
+    animation: iconPop 0.4s ease; /* Icon pop animation */
+}
+
+@keyframes iconPop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Sliding Underline Animation for Sidebar */
+.sidebar-item::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    background-color: #FF6F61; /* Coral color for underline */
+    width: 0;
+    left: 50%;
+    bottom: 0;
+    transition: width 0.4s ease, left 0.4s ease;
+}
+
+.sidebar-item:hover::after,
+.sidebar-item.selected::after {
+    width: 100%;
+    left: 0;
+}
+
+.category-list {
+    padding-left: 25px; /* Indentation for expanded categories */
+    display: none; /* Hidden by default */
+}
+
+.category-list.show {
+    display: block; /* Show when expanded */
+}
+
+/* Smaller text size for category items */
+.category-item {
+    font-size: 12px; /* Smaller text size */
+    color: #555; /* Adjust color if needed */
+}
+
+/* Adjust font size for category names */
+.category-item span {
+    font-size: 12px; /* Smaller font size for category names */
+}
+
+.container {
+    padding: 25px;
+    flex-grow: 1;
+    width: calc(100% - 220px); /* Adjust to full width minus sidebar */
+    background-color: #ffffff; /* White background for main content */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow-y: auto; /* Enable vertical scrolling */
+    height: 100vh; /* Limit container height to viewport height */
+    box-sizing: border-box; /* Include padding and border in height */
+    animation: gradientBackground 10s ease infinite; /* Subtle gradient animation */
+}
+
+@keyframes gradientBackground {
+    0% {
+        background: linear-gradient(135deg, #fff, #f7f7f7);
+    }
+    50% {
+        background: linear-gradient(135deg, #f7f7f7, #fff);
+    }
+    100% {
+        background: linear-gradient(135deg, #fff, #f7f7f7);
+    }
+}
+
+/* Header styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    position: sticky; /* Make header sticky */
+    top: 0; /* Stick to the top */
+    background-color: #ffffff; /* Ensure header has a background */
+    z-index: 1; /* Make sure header is on top of content */
+    padding: 15px 25px; /* Add padding to the header */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Enhanced Search Bar */
+#search {
+    width: calc(100% - 180px); /* Updated width to take more space */
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 25px; /* More rounded corners */
+    font-size: 15px;
+    color: #333; /* Dark grey text */
+    background: linear-gradient(145deg, #fff, #f0f0f0); /* Gradient background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Outer shadow */
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+    animation: placeholderSlide 3s infinite alternate; /* Placeholder animation */
+}
+
+@keyframes placeholderSlide {
+    0% {
+        color: #999;
+    }
+    100% {
+        color: #666;
+        letter-spacing: 1px;
+    }
+}
+
+#search:focus {
+    box-shadow: 0 0 15px rgba(60, 179, 113, 0.4); /* Mint green focus shadow */
+    background: linear-gradient(145deg, #f0f0f0, #fff); /* Inverse gradient */
+}
+
+#add-video-btn {
+    padding: 12px 18px;
+    background: linear-gradient(145deg, #3CB371, #2E8B57); /* Gradient background */
+    color: #fff; /* White text */
+    border: none;
+    cursor: pointer;
+    border-radius: 20px; /* More rounded */
+    font-size: 15px;
+    position: relative; /* For ripple effect */
+    overflow: hidden; /* For ripple effect */
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-left: 10px;
+    animation: pulse 2s infinite; /* Pulse animation */
+}
+
+#add-video-btn:hover {
+    background: linear-gradient(145deg, #2E8B57, #3CB371); /* Inverse gradient on hover */
+    transform: scale(1.05); /* Slight grow on hover */
+}
+
+#add-video-btn:active::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.4); /* Ripple color */
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    top: 50%;
+    left: 50%;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(60, 179, 113, 0.6);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(60, 179, 113, 0.8);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(60, 179, 113, 0.6);
+    }
+}
+
+/* Video grid styling */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    width: 100%; /* Full width */
+    margin-top: 10px; /* Space from the sticky header */
+}
+
+.video-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    background-color: #fff; /* White background for video items */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Soft shadow */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    position: relative; /* For spinner */
+    animation: bounceIn 1s ease-out; /* Bounce-in effect */
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.video-item:hover {
+    transform: translateY(-8px); /* Slight lift on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+    background-color: #FFFAF0; /* Soft yellow glow on hover */
+}
+
+.video-item.loading::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    border: 4px solid #FF6F61;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Video link click animation */
+.video-item .video-title a:active {
+    animation: zoomOut 0.6s forwards; /* Simpler click animation */
+}
+
+@keyframes zoomOut {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+}
+
+.video-thumbnail img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    border-radius: 12px; /* Rounded corners */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-thumbnail img:hover {
+    transform: scale(1.08); /* Enlarge on hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+}
+
+.video-title {
+    margin-top: 12px;
+    font-size: 16px;
+    color: #333; /* Dark grey text */
+    text-align: left;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Show 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.video-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.video-actions button {
+    padding: 6px 12px;
+    background: linear-gradient(145deg, #8A2BE2, #6A1BA2); /* Gradient lavender */
+    color: #fff; /* White text */
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    position: relative; /* For ripple effect */
+    overflow: hidden; /* For ripple effect */
+}
+
+.video-actions button:hover {
+    background: linear-gradient(145deg, #6A1BA2, #8A2BE2); /* Inverse gradient */
+    transform: translateY(-3px); /* Lift on hover */
+}
+
+.video-actions button:active::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.4); /* Ripple color */
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    top: 50%;
+    left: 50%;
+    pointer-events: none;
+}
+
+/* Suggestion container styles */
+.suggestion-container {
+    position: relative;
+    width: 100%;
+    max-height: 150px; /* Limit the height of the suggestions box */
+    overflow-y: auto; /* Enable scrolling if suggestions overflow */
+    background-color: #ffffff; /* White background */
+    border: 1px solid #ddd; /* Border around suggestions */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    z-index: 100; /* Higher than the modal content */
+    margin-top: 5px; /* Small space between input and suggestions */
+    display: none; /* Initially hidden */
+}
+
+/* Suggestion item styles */
+.suggestion-item {
+    padding: 8px 12px; /* Padding for suggestion items */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0; /* Light grey on hover */
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: slideUp 0.5s ease-out; /* Slide-up animation for modal */
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background-color: #ffffff; /* White background */
+    padding: 20px; /* Reduced padding */
+    border-radius: 15px; /* Reduced rounding */
+    width: 300px; /* Smaller width */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Reduced gap */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: popIn 0.3s ease-out; /* Pop-in animation */
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-content h2 {
+    margin: 0;
+    font-size: 18px; /* Slightly smaller font size */
+    color: #333; /* Dark grey text */
+    text-align: center;
+    padding-bottom: 10px; /* Reduced bottom padding */
+}
+
+.modal-content input[type="text"] {
+    padding: 8px; /* Reduced padding */
+    border: 1px solid #ddd;
+    border-radius: 15px; /* Reduced rounding */
+    font-size: 13px; /* Slightly smaller font */
+    background-color: #fff; /* White input background */
+    color: #333; /* Dark grey text */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05); /* Inner shadow */
+    transition: all 0.3s ease; /* Smooth transition for focus */
+    outline: none; /* Remove default outline */
+}
+
+.modal-content input[type="text"]:focus {
+    border-color: #66BB6A; /* Green border on focus */
+    box-shadow: 0 0 5px rgba(102, 187, 106, 0.4); /* Subtler glow effect */
+    transform: scale(1.01); /* Slight grow on focus */
+}
+
+.modal-content button {
+    padding: 10px; /* Reduced padding */
+    border: 2px solid transparent;
+    border-radius: 15px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 13px; /* Smaller font size */
+    transition: all 0.3s ease;
+    background: linear-gradient(145deg, #66BB6A, #43A047); /* New green gradient */
+    color: #fff; /* White text */
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.modal-content button:hover {
+    background: linear-gradient(145deg, #43A047, #66BB6A); /* Inverse gradient */
+    border-color: #ddd; /* Border on hover */
+}
+
+.modal-content button:active {
+    transform: translateY(2px); /* Pressed down effect */
+}
+
+/* Save and Update Button Enhancements */
+#save-video-btn, #update-video-btn {
+    padding: 10px; /* Reduced padding */
+    background: linear-gradient(145deg, #3CB371, #2E8B57); /* Mint green gradient */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px; /* Rounded corners */
+    font-size: 14px; /* Smaller font size */
+    margin-top: 8px; /* Reduced margin */
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Button shadow */
+}
+
+#save-video-btn:hover, #update-video-btn:hover {
+    background: linear-gradient(145deg, #2E8B57, #3CB371); /* Inverse gradient */
+    transform: translateY(-2px); /* Subtle lift on hover */
+}
+
+.close-button, .edit-close-button, .settings-close-button {
+    position: absolute;
+    right: 10px; /* Adjusted position */
+    top: 10px; /* Adjusted position */
+    cursor: pointer;
+    font-size: 16px; /* Slightly smaller icon */
+    color: #777; /* Gray close button */
+    transition: color 0.3s ease;
+}
+
+.close-button:hover, .edit-close-button:hover, .settings-close-button:hover {
+    color: #333; /* Darker on hover */
+}
+
+/* Redesigned Settings Button */
+.settings-button {
+    position: fixed;
+    bottom: 20px; /* Adjusted position */
+    left: 20px; /* Adjusted position */
+    width: 40px; /* Reduced size */
+    height: 40px; /* Reduced size */
+    background: linear-gradient(145deg, #FF6F61, #E85C50); /* Coral gradient background */
+    color: #fff; /* White text */
+    border: none;
+    cursor: pointer;
+    border-radius: 50%; /* Circular button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    animation: wiggle 2s infinite; /* Wiggle animation */
+}
+
+@keyframes wiggle {
+    0%, 100% {
+        transform: rotate(-5deg);
+    }
+    50% {
+        transform: rotate(5deg);
+    }
+}
+
+.settings-button i {
+    font-size: 18px; /* Smaller icon size */
+}
+
+.settings-button:hover {
+    transform: scale(1.1); /* Grow effect */
+    background: linear-gradient(145deg, #E85C50, #FF6F61); /* Inverse gradient */
+}
+
+/* For Other Sources two-column layout */
+.video-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 20px;
+    margin-top: 15px;
+    width: 100%; /* Take full width */
+}
+
+.video-list-item {
+    padding: 12px 18px;
+    background-color: #fff; /* White background for list items */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.video-list-item .video-title {
+    flex: 1;
+    margin-right: 10px;
+    color: #FF6F61; /* Coral link color */
+}
+
+.video-list-item .video-title a {
+    text-decoration: none;
+    color: #333; /* Dark grey link color */
+}
+
+.video-list-item .video-title a:hover {
+    text-decoration: underline;
+}
+
+.video-list-item .video-actions {
+    display: flex;
+    gap: 8px;
+}

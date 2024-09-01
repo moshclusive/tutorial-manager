@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tutorial Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- Favicon Link -->
+    <link rel="icon" href="fav.png" type="image/png"> <!-- Link to favicon -->
+    
+    <script src="index.js" defer></script> <!-- Include JavaScript -->
+</head>
+<body>
+    <div class="sidebar">
+        <!-- Home Button -->
+        <div class="sidebar-item" id="home-btn">
+            <i class="fas fa-home"></i> <!-- Font Awesome Home Icon -->
+            <span>Home</span>
+        </div>
+        <!-- Categories Button -->
+        <div class="sidebar-item" id="category-btn">
+            <i class="fas fa-folder"></i> <!-- Font Awesome Folder Icon -->
+            <span>Categories</span>
+        </div>
+        <!-- Categories List (Expandable) -->
+        <div class="category-list" id="folder-list" style="display: none;"></div>
+
+        <!-- Other Sources Button -->
+        <div class="sidebar-item" id="other-sources-btn">
+            <i class="fas fa-video"></i> <!-- Font Awesome Video Icon -->
+            <span>Other Sources</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sticky Header with Search Bar and Add Video Button -->
+        <div class="header">
+            <input type="text" id="search" placeholder="Search Videos...">
+            <button id="add-video-btn">Add Video</button>
+        </div>
+        <div id="video-grid" class="grid"></div>
+    </div>
+
+    <!-- Add Video Modal -->
+    <div id="add-video-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Add Video</h2>
+            <input type="text" id="video-url" placeholder="Enter Video URL">
+            <input type="text" id="video-title" placeholder="Enter Title (Optional)">
+            <input type="text" id="folder-name" placeholder="Enter Category Name">
+            <!-- Category Suggestions -->
+            <div id="suggestion-container" class="suggestion-container"></div>
+            <button id="save-video-btn">Save Video</button>
+        </div>
+    </div>
+
+    <!-- Settings Button -->
+    <button class="settings-button" id="settings-btn">
+        <i class="fas fa-cog"></i> <!-- Font Awesome Cog Icon -->
+    </button>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button settings-close-button">&times;</span>
+            <h2>Settings</h2>
+            <button id="export-json-btn">Export to JSON</button>
+            <button id="export-csv-btn">Export to CSV</button>
+            <button id="import-json-csv-btn">Import JSON/CSV</button>
+            <input type="file" id="import-file-input" accept=".json,.csv" style="display:none;">
+        </div>
+    </div>
+
+    <!-- Edit Video Modal -->
+    <div id="edit-video-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button edit-close-button">&times;</span>
+            <h2>Edit Video</h2>
+            <input type="text" id="edit-video-url" placeholder="Enter Video URL" disabled>
+            <input type="text" id="edit-video-title" placeholder="Enter Title">
+            <input type="text" id="edit-folder-name" placeholder="Enter Category Name">
+            <button id="update-video-btn">Update Video</button>
+        </div>
+    </div>
+</body>
+</html>
